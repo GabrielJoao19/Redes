@@ -66,4 +66,26 @@ public class IPAdress {
 
         return formatado.toString();
     }
+
+    public boolean IPAdressIsMask(){
+        String [] partes = IPadress.split("\\.");
+        StringBuilder binario = new StringBuilder();
+
+        for (String i : partes){
+            int val = Integer.parseInt(i);
+            String bin = String.format("%8s", Integer.toBinaryString(val)).replace(" ","0");
+            binario.append(bin);
+        }
+
+        String binstr = binario.toString();
+        int primeiroZero = binstr.indexOf("0");
+        int ultimoUm = binstr.lastIndexOf("1");
+
+        if (primeiroZero == -1 || ultimoUm < primeiroZero){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
